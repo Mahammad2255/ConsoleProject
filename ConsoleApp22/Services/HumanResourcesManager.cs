@@ -26,6 +26,7 @@ namespace ConsoleApp22.Services
             _departments = new Department[0];
             _employees = new Employee[0];
 
+
         }
         
 
@@ -70,9 +71,31 @@ namespace ConsoleApp22.Services
         }
 
 
-        public void EditEmploye()
+        public void EditEmploye(string pos, double salary)
         {
-            throw new NotImplementedException();
+            Employee employe = null;
+
+            foreach (Employee item in _employees)
+            {
+                if (item.Position == pos)
+                {
+                    employe = item;
+                    break;
+                }
+            }
+            foreach (Employee item in _employees)
+            {
+                if (item.Salary == salary)
+                {
+                    employe = item;
+                    break;
+                }
+            }
+
+            employe.Position = pos;
+            employe.Salary = salary;
+
+
         }
 
         public void GetDepartments(Department Departaments)
@@ -80,14 +103,35 @@ namespace ConsoleApp22.Services
             throw new NotImplementedException();
         }
 
-        public void RemoveEmployee()
+        public void RemoveEmployee(string isci)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < _employees.Length; i++)
+            {
+                if(Employees[i] != null && _employees[i].No == isci)
+                {
+                    _employees[i] = null;
+                    return;
+                }
+            }
         }
 
         public void ShowEmployee()
         {
             throw new NotImplementedException();
         }
+
+        public void GetEmployeeByDepartment(string DepName)
+        {
+            foreach (Employee item in _employees)
+            {
+                if (item.DepartmentName == DepName)
+                {
+                    Console.WriteLine(item);
+                }
+
+            }
+        }
+
+      
     }
 }

@@ -16,8 +16,12 @@ namespace ConsoleApp22.Interfaces
         //void GetDepartments(Department Departaments);
         void EditDepartments(string name, double workerLimit, double salaryLimit);
         void AddEmployee(string fullname, string position, double salary, string DepName);
-        void RemoveEmployee();
+        void RemoveEmployee(string DepName);
+
+        void GetEmployeeByDepartment(string DepName);
         void ShowEmployee();
-        void EditEmploye();
+        void EditEmploye(string pos, double salary);
+        
+        
     }
 }
