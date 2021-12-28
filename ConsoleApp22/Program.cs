@@ -16,8 +16,8 @@ namespace ConsoleApp22
 
             do
             {
-                Console.WriteLine("--------------------------WORK--------------------");
-                Console.WriteLine("Nomre daxil edin");
+                Console.WriteLine("-------------------- Human Resource Management  --------------------");
+                
                 Console.WriteLine("1: Departameantlerin siyahisini gostermek");
                 Console.WriteLine("2: Departamenet yaratmaq");
                 Console.WriteLine("3: Departamenetde deyisiklik et");
@@ -26,6 +26,7 @@ namespace ConsoleApp22
                 Console.WriteLine("6: Iscilerin siyahisini gostermek");
                 Console.WriteLine("7: Isciler uzerinde deyisiklik");
                 Console.WriteLine("8: Iscileri silme");
+                Console.Write("\nEmeliyyatin nomresini daxil edin: ");
 
                 string choose = Console.ReadLine();
                 int chooseNum;
@@ -88,7 +89,7 @@ namespace ConsoleApp22
                 Console.WriteLine("------------------------------------");
             }
 
-            Console.Write("Duzelis Etmek Isdediyniz Departamentin adini Daxil Et");
+            Console.Write("Duzelis Etmek Isdediyniz Departamentin adini Daxil Et: ");
             string depName = Console.ReadLine();
             bool checkDepName = true;
             int count = 0;
@@ -212,23 +213,23 @@ namespace ConsoleApp22
                 count = 0;
             }
 
-            Console.WriteLine("Isci sayini daxil edin");
+            Console.Write("Isci sayini daxil edin: ");
             string workerLimit = Console.ReadLine();
             double workekNum;
 
             while (!double.TryParse(workerLimit, out workekNum) || workekNum < 1)
             {
-                Console.WriteLine("Duzgun Say Daxil Et:");
+                Console.Write("Duzgun Say Daxil Et: ");
                 workerLimit = Console.ReadLine();
             }
 
-            Console.WriteLine("Salary Limiti daxil edin");
+            Console.Write("Salary Limiti daxil edin: ");
             string salaryLimit = Console.ReadLine();
             double salaryNum;
 
             while (!double.TryParse(salaryLimit, out salaryNum) || salaryNum < 250)
             {
-                Console.WriteLine("Duzgun Salary Daxil Et:");
+                Console.Write("Duzgun Salary Daxil Et: ");
                 salaryLimit = Console.ReadLine();
 
             }
@@ -236,42 +237,43 @@ namespace ConsoleApp22
             humanResourcesManager.AddDepartment(name, workekNum, salaryNum);
 
         }
-
+        static int workerCount = 0;
         static void AddEmployee(ref HumanResourcesManager humanResourcesManager)
         {
-
-
+            
+            double workerLimit=0;
 
             if (humanResourcesManager.Departments.Length <= 0)
             {
-                Console.WriteLine("Evvelce department yaradin.");
+                Console.Write("Evvelce department yaradin.");
                 return;
 
             }
 
+            Start:
 
             Console.Write("Elave edeceyiniz Iscinin adini daxil edin: ");
             string name = Console.ReadLine();
 
 
 
-            Console.WriteLine("Isci Positionunu daxil edin");
+            Console.Write("Isci Positionunu daxil edin: ");
             string workerPos = Console.ReadLine();
 
 
             while (workerPos.Length! < 2)
             {
-                Console.WriteLine("Position adi 2 herfden az olmamalidir:");
+                Console.Write("Position adi 2 herfden az olmamalidir: ");
                 workerPos = Console.ReadLine();
             }
 
-            Console.WriteLine("Salary daxil edin");
+            Console.Write("Salary daxil edin");
             string salary = Console.ReadLine();
             double salaryNum;
 
             while (!double.TryParse(salary, out salaryNum) || salaryNum < 250)
             {
-                Console.WriteLine("Duzgun Salary Daxil Et:");
+                Console.Write("Duzgun Salary Daxil Et: ");
                 salary = Console.ReadLine();
 
             }
@@ -299,14 +301,30 @@ namespace ConsoleApp22
                     nameDep = Console.ReadLine();
 
                 }
-
-
                 else
                 {
 
                     chechNameD = false;
                 }
                 countCheck = 0;
+
+                
+                
+                foreach (Department item in humanResourcesManager.Departments)
+                {
+                    if (nameDep == item.Name)
+                    {
+                        workerCount++;
+                        workerLimit = item.WorkerLimit;
+                    }
+
+                }
+                if (workerCount > Convert.ToInt32(workerLimit))
+                {
+                    Console.WriteLine("Bu department uzre isci limitini kecmek olmaz. \n Basqa departament yoxlayin");
+                    goto Start;
+                }
+
                 humanResourcesManager.AddEmployee(name, workerPos, salaryNum, nameDep);
 
 
@@ -316,7 +334,7 @@ namespace ConsoleApp22
         }
         static void GetEmployeeByDepartment(ref HumanResourcesManager humanResourcesManager)
         {
-            Console.WriteLine("Departament adi daxil edin:");
+            Console.Write("Departament adi daxil edin: ");
             string depNameIs = Console.ReadLine();
 
             humanResourcesManager.GetEmployeeByDepartment(depNameIs);
@@ -324,7 +342,7 @@ namespace ConsoleApp22
         }
         static void EditEmployee(ref HumanResourcesManager humanResourcesManager)
         {
-            Console.Write("Duzelis Etmek Isdediyniz Iscinin Nomresini Daxil Et");
+            Console.Write("Duzelis Etmek Isdediyniz Iscinin Nomresini Daxil Et: ");
             string empName = Console.ReadLine();
             bool checkEmpName = true;
             int count = 0;
@@ -363,7 +381,7 @@ namespace ConsoleApp22
 
                 while (namePos.Length ! < 2)
                 {
-                    Console.WriteLine("Isci vezifesi 2 herfden az ola bilmez:");
+                    Console.WriteLine("Isci vezifesi 2 herfden az ola bilmez: ");
                     namePos = Console.ReadLine();
                 }
 
@@ -383,7 +401,7 @@ namespace ConsoleApp22
 
                 while (nameSalary < 250)
                 {
-                    Console.WriteLine("Isci maasi 250den  az ola bilmez:");
+                    Console.WriteLine("Isci maasi 250-den  az ola bilmez: ");
                     nameSal = Console.ReadLine();
                 }
 
@@ -451,6 +469,19 @@ namespace ConsoleApp22
         {
             
         }
+
+        //static bool CheckEmployeeLimit(string departmentName)
+        //{
+        //    foreach (Department item in humanResourcesManager.Departments)
+        //    {
+        //        if (nameDep == item.Name)
+        //        {
+        //            countCheck++;
+        //        }
+
+        //    }
+        //    return true;
+        //}
 
     }
     }

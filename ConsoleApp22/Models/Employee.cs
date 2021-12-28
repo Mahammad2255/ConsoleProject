@@ -58,7 +58,7 @@ namespace ConsoleApp22
 
         public override string ToString()
         {
-            return $"Nomresi: {No} Adi: {Fullname}position: {Position} Maasi {Salary} Departmenti {DepartmentName }  ";
+            return $"Nomresi: {No} Adi: {Fullname} Position: {Position} Maasi: {Salary} Departmenti: {DepartmentName }  ";
         }
     }
 }
