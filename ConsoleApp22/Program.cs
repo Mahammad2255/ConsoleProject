@@ -14,7 +14,7 @@ namespace ConsoleApp22
             HumanResourcesManager humanResourcesManager = new HumanResourcesManager();
             do
             {
-                Console.WriteLine("-------------------------WORK--------------------");
+                Console.WriteLine("--------------------------WORK--------------------");
                 Console.WriteLine("Nomre daxil edin");
                 Console.WriteLine("1: Departameantlerin siyahisini gostermek");
                 Console.WriteLine("2: Departamenet yaratmaq");
