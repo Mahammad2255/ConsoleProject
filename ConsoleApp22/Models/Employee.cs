@@ -9,12 +9,14 @@ namespace ConsoleApp22
 {
     class Employee
     {
+       
         public string No { get; set; }
-      
+        
         public string Fullname { get; set; }
         public string Position { get; set; }
         public string DepartmentName { get; set; }
         public double _salary { get; set; }
+        public double AverageSalary { get; set; }
         //public Department[] DepartmentName { get; set; }
 
         public static int Count = 1000;
@@ -29,8 +31,9 @@ namespace ConsoleApp22
             Fullname = fullname;
             Position = position;
             _salary = salary;
-            
-          
+            AverageSalary = 0;
+            //AverageSalary = salary+
+           
            
             
 

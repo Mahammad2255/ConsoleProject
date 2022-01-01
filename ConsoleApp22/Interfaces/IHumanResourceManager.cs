@@ -10,7 +10,7 @@ namespace ConsoleApp22.Interfaces
     interface IHumanResourceManager
     {
         Department[] Departments { get; }
-        Employee[] Employees { get; }
+        
 
         void AddDepartment(string name, double workerLimit, double salaryLimit /*Department Employees*/);
         //void GetDepartments(Department Departaments);

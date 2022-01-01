@@ -10,7 +10,14 @@ namespace ConsoleApp22.Models
 {
     class Department
     {
+        public Employee[] Employees => _employees;
+        public Employee[] _employees;
+        
+        
+
         public string Name { get; set; }
+      
+
         public Employee Employee { get; set; }
         public double Average { get; set; }
         public double WorkerLimit { get; set; }
@@ -23,71 +30,35 @@ namespace ConsoleApp22.Models
             Name = name;
             WorkerLimit = workerLimit;
             SalaryLimit = salaryLimit;
-             
+            _employees = new Employee[0];
+
 
         }
+        public double CalcSalaryAverage()
+        {
+            double avarage = 0;
+            double umumiMaas = 0;
+            int count = 0;
+            foreach (Employee item in Employees)
+            {
 
-        //public double CalcSalaryAverage()
-        //{
-        //    double result = 0;
-        //    int count = 0;
-        //    foreach (var item in Ortalama.Employees)
-        //    {
-               
-                
-        //        for (int i = 0; i < item.No.Length; i++)
-        //        {
-        //            if(item.DepartmentName[i] == item.DepartmentName[i+1])
-        //            {
-        //                count++;
-        //                result = item.Salary / count;
-        //            }
-        //        }
+                if (item.DepartmentName == Name)
+                {
+                    count++;
+                    avarage = avarage + item.Salary;
 
-              
+                }
+                umumiMaas = avarage / count;
+            }
 
-        //    }
-
-        //    return result;
-        //}
-
-
+            return umumiMaas;
+        }
         public override string ToString()
         {
             return $"Departmentin adi:{Name}\nIsci limiti :{WorkerLimit}\nMaas limiti:{SalaryLimit}";
         }
 
-        //public override double CalcSalaryAverage()
-        //{
-        //    return: { Average}
-        //}
-
-
-
-        //public string[] Departments = { };
-
-        //public Employee Employees { get; set; }
-
-
-        //public void calcsalaryaverage(int salaryLimit )
-        //{
-        //    SalaryLimit = salaryLimit;
-
-        //}
-
-        //public Department(string name, double workerLimit, double salaryLimit/*, Employee employee*//*s*/)
-        //{
-        //    Name = name;
-        //    WorkerLimit = workerLimit;
-        //    SalaryLimit = salaryLimit;
-
-
-        //}
-        //public Department(string name, )
-        //{
-
-        //}
-
+       
 
 
     }
