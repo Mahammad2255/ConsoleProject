@@ -425,6 +425,21 @@ namespace ConsoleApp22
         }
         static void EditEmployee(ref HumanResourcesManager humanResourcesManager)
         {
+            foreach (Department item in humanResourcesManager.Departments)
+            {
+                if (item.Employees.Length <= 0)
+                {
+                    Console.WriteLine("Siyahi bosdur, evvelce daxil edin.");
+                    return;
+
+                }
+
+                foreach (Employee item2 in item.Employees)
+                {
+                    Console.WriteLine(item2);
+                    Console.WriteLine("-------------------------------------------------");
+                }
+            }
             Console.Write("Duzelis Etmek Isdediyniz Iscinin Nomresini Daxil Et: ");
             string empName = Console.ReadLine();
             bool checkEmpName = true;
@@ -488,53 +503,46 @@ namespace ConsoleApp22
                     
 
                 }
-
-                foreach (Department item in humanResourcesManager.Departments)
+                foreach (var item in humanResourcesManager.Departments)
                 {
-                    foreach (Employee item2 in item.Employees)
+                    while (nameSalary > item.SalaryLimit)
                     {
-                        if (nameSalary > item.SalaryLimit)
-                        {
-                            Console.WriteLine("Isciye ayliq verile bilecek maasin limitini kecdiz tekrar yoxlayin");
-                                         return;
-                        }
+                        Console.WriteLine("Isci maasi limitini kecmisiniz");
+                        return;
                     }
                 }
+
+                foreach (var item in humanResourcesManager.Departments)
+                {
+
+
+                    foreach (Employee item1 in item.Employees)
+                    {
+                        if (item1.No.ToLower() == empName.ToLower())
+                        {
+                            item1.Salary = nameSalary;
+                        }
+
+
+                    }
+                }
+
                 //foreach (Department item in humanResourcesManager.Departments)
                 //{
-
                 //    foreach (Employee item2 in item.Employees)
                 //    {
-                //        if (namePos == item2.Position)
+                //        if (nameSalary > item.SalaryLimit )
                 //        {
-
-                //            if (nameSalary > item.SalaryLimit)
-                //            {
-                //                Console.WriteLine("Isciye ayliq verile bilecek maasin limitini kecdiz tekrar yoxlayin");
-                //                return;
-                //            }
-
-
-
+                //            Console.WriteLine("Isciye ayliq verile bilecek maasin limitini kecdiz tekrar yoxlayin");
+                //                         return;
                 //        }
-
+                //        else
+                //        {
+                //            humanResourcesManager.EditEmploye(namePos, nameSalary);
+                //        }
                 //    }
-
                 //}
 
-
-                //while (nameSalary < 250) 
-                //{
-                //    if (nameSalary < 250)
-                //    {
-                //        Console.WriteLine("Isci maasi 250-den  az ola bilmez: ");
-                //        nameSal = Console.ReadLine();
-
-                //    }
-                //else
-                //{
-                //    nameSalaryChecker = false;
-                //}
                 humanResourcesManager.EditEmploye(namePos, nameSalary);
             }
 
