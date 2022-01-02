@@ -22,9 +22,10 @@ namespace ConsoleApp22.Models
         public double Average { get; set; }
         public double WorkerLimit { get; set; }
         public double SalaryLimit { get; set; }
+        public double salaryNow { get; set; }
         //public HumanResourcesManager Ortalama { get; set; }
 
-        
+
         public Department(string name, double workerLimit, double salaryLimit)
         {
             Name = name;
@@ -53,6 +54,7 @@ namespace ConsoleApp22.Models
 
             return umumiMaas;
         }
+       
         public override string ToString()
         {
             return $"Departmentin adi:{Name}\nIsci limiti :{WorkerLimit}\nMaas limiti:{SalaryLimit}";

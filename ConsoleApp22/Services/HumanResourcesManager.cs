@@ -43,16 +43,24 @@ namespace ConsoleApp22.Services
         //    _departments[_departments.Length - 1] = department;
         //}
 
-        public void AddEmployee(/*string no,*/ string fullname, string position, double salary, string DepName)
+        public void AddEmployee(/*string no,*/ string fullname, string position, double salary, string DepName,double salaryLimit)
         {
             foreach (Department item in Departments)
             {
-                if(item.Employees!=null && item.Name.ToLower() == DepName.ToLower())
+                if (salaryLimit < item.SalaryLimit)
                 {
-                    Employee employee = new Employee(fullname, position, salary, DepName);
-                    Array.Resize(ref item._employees, item._employees.Length + 1);
-                    item._employees[item._employees.Length - 1] = employee;
-                    break;
+                    if (item.Employees != null && item.Name.ToLower() == DepName.ToLower())
+                    {
+                        Employee employee = new Employee(fullname, position, salary, DepName);
+                        Array.Resize(ref item._employees, item._employees.Length + 1);
+                        item._employees[item._employees.Length - 1] = employee;
+                        break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Isci maas limitini kecdiz");
+                    return;
                 }
             }
         }
@@ -80,27 +88,31 @@ namespace ConsoleApp22.Services
 
         public void EditEmploye(string pos, double salary)
         {
-            //Employee employe = null;
+            Employee employe = null;
+            foreach (Department item in Departments)
+            {
+                foreach (Employee item2 in item._employees)
+                {
+                    if (item2.Position == pos)
+                    {
+                        employe = item2;
+                        break;
+                    }
+                }
+                foreach (Employee item3 in item._employees)
+                {
+                    if (item3.Salary == salary)
+                    {
+                        employe = item3;
+                        break;
+                    }
+                }
+            }
+           
+           
 
-            //foreach (Employee item in _employees)
-            //{
-            //    if (item.Position == pos)
-            //    {
-            //        employe = item;
-            //        break;
-            //    }
-            //}
-            //foreach (Employee item in _employees)
-            //{
-            //    if (item.Salary == salary)
-            //    {
-            //        employe = item;
-            //        break;
-            //    }
-            //}
-
-            //employe.Position = pos;
-            //employe.Salary = salary;
+            employe.Position = pos;
+            employe.Salary = salary;
 
 
         }
@@ -118,7 +130,7 @@ namespace ConsoleApp22.Services
                 {
                     if (item.Employees[i] != null && item._employees[i].No == isci)
                     {
-
+                        
                         item._employees[i] = null;
                         return;
                         
@@ -141,14 +153,20 @@ namespace ConsoleApp22.Services
                 {
                     foreach (Employee item2 in item.Employees)
                     {
-                        if (depNameIs.ToLower() == item2.DepartmentName.ToLower())
+                        if(item2.No == null)
                         {
-                            
-                                Console.WriteLine(item2);
-                            
+                            Console.WriteLine("silinib");
+                            return;
                         }
 
-                       
+                        else if (depNameIs.ToLower() == item2.DepartmentName.ToLower())
+                        {
+
+                            Console.WriteLine(item2);
+
+                        }
+
+
 
                     }
                 }
